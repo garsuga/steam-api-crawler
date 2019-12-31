@@ -3,10 +3,7 @@ import requests
 import time
 
 # API Time variables
-# maxRequestsPerFiveMinutes = 200
-# maxRequestsPerSecond = 200 / (5 * 60)
 delay = 1.5 * 1.1
-# delay = delay * 1.1
 lastTime = time.time()
 
 
@@ -61,7 +58,6 @@ class SteamAPI:
             api_wait()
             self.num_requests += 1
             resp = requests.get(url).json()['response']
-            # print("resp" + str(type(resp)) + " " + str(resp))
             return resp['games'] if ('games' in resp) else {}
         except Exception as e:
             print("Caught exception in request_user_games")
@@ -87,11 +83,9 @@ class SteamAPI:
     # Return User, {Games} (combined to reduce api calls)
     def get_user_and_games(self, steamid):
         data = self.__request_user_games(steamid)
-        # print("data" + str(type(data)) + " " + str(data))
         games = {}
         user_games = {}
         for g in data:
-            # print("game: " + str(type(g)) + " " + str(g))
             game = Game(g)
             user_game = UserGame(g)
             games[game.appid] = game

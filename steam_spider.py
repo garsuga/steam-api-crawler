@@ -63,10 +63,7 @@ class SteamCrawler:
                         self.queue.extend([friend.steamid for friend in friends])
                 dat = self.steam.get_user_and_games(id)
                 print("\t\t\t" + str(len(dat[1])) + " games")
-                # print("dat1: " + str(type(dat[1])) + " " + str(dat[1]))
                 for (k, g) in dat[1].items():
-                    # print("k: " + str(type(k)) + " " + str(k))
-                    # print("g: " + str(type(g)) + " " + str(g))
                     self.__apply_game(g)
                 self.__apply_user(dat[0])
                 print("\t\t" + str(len(self.users)) + " total users")
