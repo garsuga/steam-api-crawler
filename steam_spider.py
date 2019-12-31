@@ -10,8 +10,8 @@ class SteamCrawler:
     def __init__(self, file_api_key, file_init_ids, file_checked_ids, dir_games, dir_users):
         with open(file_api_key, 'r+') as f:
             self.steam = steam_api.SteamAPI(f.readline())
-        self.queue = [e.strip() for e in open(file_init_ids, 'r+').readlines()]
-        self.checked = [e.strip() for e in open(file_checked_ids, 'r+').readlines()]
+        self.queue = [e.strip() for e in open(file_init_ids, 'rw+').readlines()]
+        self.checked = [e.strip() for e in open(file_checked_ids, 'rw+').readlines()]
 
         self.games = self.__load_games(dir_games)
         self.users = self.__load_users(dir_users)
@@ -22,6 +22,8 @@ class SteamCrawler:
 
     def __load_games(self, dir_games):
         dat = {}
+        if not os.path.exists(dir_games):
+            os.makedirs(dir_games)
         for f in os.listdir(dir_games):
             game = steam_api.Game(json.load(open(os.path.join(dir_games, f), 'r+')))
             dat[game.appid] = game
@@ -33,6 +35,8 @@ class SteamCrawler:
 
     def __load_users(self, dir_users):
         usrs = {}
+        if not os.path.exists(dir_users):
+            os.makedirs(dir_users)
         for f in os.listdir(dir_users):
             dat = json.load(open(os.path.join(dir_users, f), 'r+'))
             usr_games = {}
