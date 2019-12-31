@@ -6,6 +6,8 @@ SteamSpider gathers data on games and user playtimes. Access to the Steam API is
 Accounts are traversed by receiving a starting sample of Steam user ID's and branching to friends recursively.
 Storage is done using JSON in the directories ``./users`` and ``./games`` where file are named by Steam ID and App ID respectively. 
 
+Requires pip package ``requests``: ``pip install requests``
+
 ## The following files are required in the working directory to run.
 
 ``initids.txt`` Sample starting user IDs (requires at least 1 with friends to branch, repeats will be skipped during consecutive runs) Ex:
