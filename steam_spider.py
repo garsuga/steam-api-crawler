@@ -10,8 +10,8 @@ class SteamCrawler:
     def __init__(self, file_api_key, file_init_ids, file_checked_ids, dir_games, dir_users):
         with open(file_api_key, 'r+') as f:
             self.steam = steam_api.SteamAPI(f.readline())
-        self.queue = [e.strip() for e in open(file_init_ids, 'rw+').readlines()]
-        self.checked = [e.strip() for e in open(file_checked_ids, 'rw+').readlines()]
+        self.queue = [e.strip() for e in open(file_init_ids, 'r+').readlines()]
+        self.checked = [e.strip() for e in open(file_checked_ids, 'r+').readlines()]
 
         self.games = self.__load_games(dir_games)
         self.users = self.__load_users(dir_users)
