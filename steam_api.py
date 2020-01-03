@@ -24,12 +24,20 @@ class Game:
     def __init__(self, dict):
         self.appid = str(dict['appid']).strip()
         self.name = str(dict['name']).strip()
-        self.img_icon_url = 'http://media.steampowered.com/steamcommunity/public/images/apps/%s/%s.jpg' \
-                       % (str(self.appid).strip(), str(dict['img_icon_url']).strip()) if 'img_icon_url' in dict else ''
-        self.img_logo_url = 'http://media.steampowered.com/steamcommunity/public/images/apps/%s/%s.jpg' \
-                       % (str(self.appid).strip(), str(dict['img_logo_url']).strip()) if 'img_logo_url' in dict else ''
-        self.has_community_visible_stats = bool(str(dict['has_community_visible_stats']).strip()) if 'has_community_visible_stats' in \
-                                                                                      dict else False
+        self.img_icon_url = str(dict['img_icon_url']).strip() if 'img_icon_url' in dict else ''
+        self.img_logo_url = str(dict['img_logo_url']).strip() if 'img_logo_url' in dict else ''
+        self.has_community_visible_stats = bool(str(dict['has_community_visible_stats']).strip()) \
+            if 'has_community_visible_stats' in dict else False
+
+    def get_icon_url(self):
+        if str.startswith(self.img_icon_url, 'http'):
+            return self.img_icon_url
+        return 'http://media.steampowered.com/steamcommunity/public/images/apps/%s/%s.jpg' % (str(self.appid).strip(), self.img_icon_url)
+
+    def get_logo_url(self):
+        if str.startswith(self.img_icon_url, 'http'):
+            return self.img_icon_url
+        return 'http://media.steampowered.com/steamcommunity/public/images/apps/%s/%s.jpg' % (str(self.appid).strip(), self.img_logo_url)
 
 
 class UserGame:

@@ -3,3 +3,4 @@
 /games/*
 /users/*
 /backup/*
+/__pycache__/*
